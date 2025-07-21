@@ -3,7 +3,7 @@ const scanButton = document.getElementById('scan-button');
 const bingoTab = document.getElementById('bingo-tab');
 const scanTab = document.getElementById('scan-tab');
 let scanner;
-let boardState = Array(5).fill().map(() => Array(5).fill(null));
+let boardState = Array(5).fill().map(() => Array(5).fill(false));
 const scans = JSON.parse(localStorage.getItem("scans") ?? "[]");
 const id = localStorage.getItem("id") ?? Math.random().toString().slice(2, 8).toUpperCase();
 localStorage.setItem("scans", JSON.stringify(scans));
@@ -11,17 +11,21 @@ localStorage.setItem("id", id);
 bingo_id.innerText = "Bingo ID: "+id;
 
 // Create bingo board
-for (let i = 0; i < 5; i++) {
-  for (let j = 0; j < 5; j++) {
-    const idx = i * 5 + j;
+for (let row = 0; row < 5; row++) {
+  for (let col = 0; col < 5; col++) {
+    const idx = row * 5 + col;
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
     cell.textContent = names[idx];
-    cell.dataset.row = i;
-    cell.dataset.col = j;
-    cell.addEventListener('click', () =>
-      showCellModal(names[idx], items[names[idx]])
-    );
+    cell.dataset.row = row;
+    cell.dataset.col = col;
+
+    // when tapped or clicked, toggle & color
+    cell.addEventListener('click', () => {
+      boardState[row][col] = !boardState[row][col];
+      cell.classList.toggle('scanned', boardState[row][col]);
+    });
+
     bingoBoard.appendChild(cell);
   }
 }
