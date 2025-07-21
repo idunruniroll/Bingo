@@ -3,7 +3,7 @@ const scanButton = document.getElementById('scan-button');
 const bingoTab = document.getElementById('bingo-tab');
 const scanTab = document.getElementById('scan-tab');
 let scanner;
-let boardState = Array(4).fill().map(() => Array(4).fill(null));
+let boardState = Array(5).fill().map(() => Array(5).fill(null));
 const scans = JSON.parse(localStorage.getItem("scans") ?? "[]");
 const id = localStorage.getItem("id") ?? Math.random().toString().slice(2, 8).toUpperCase();
 localStorage.setItem("scans", JSON.stringify(scans));
@@ -11,17 +11,21 @@ localStorage.setItem("id", id);
 bingo_id.innerText = "Bingo ID: "+id;
 
 // Create bingo board
-for (let i = 0; i < 4; i++) {
-  for (let j = 0; j < 4; j++) {
+for (let i = 0; i < 5; i++) {
+  for (let j = 0; j < 5; j++) {
+    const idx = i * 5 + j;
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
-    cell.textContent = names[i * 4 + j];
-    cell.addEventListener('click', () => showCellModal(names[i * 4 + j], items[names[i * 4 + j]]));
+    cell.textContent = names[idx];
     cell.dataset.row = i;
     cell.dataset.col = j;
+    cell.addEventListener('click', () =>
+      showCellModal(names[idx], items[names[idx]])
+    );
     bingoBoard.appendChild(cell);
   }
 }
+
 
 // Show modal for cell
 function showCellModal(title, content) {
