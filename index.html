@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bingo QR Scanner</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- QR‑code generator -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <!-- In‑browser QR scanner -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.7/minified/html5-qrcode.min.js"></script>
+</head>
+<body>
+  <h1>Bingo QR Scanner</h1>
+
+  <!-- 1) Bingo grid will go here -->
+  <div id="bingo-grid"></div>
+
+  <!-- 2) Scanner viewport -->
+  <div id="reader" style="width:300px; margin:20px auto;"></div>
+
+  <!-- your JS logic -->
+  <script src="script.js"></script>
+</body>
+</html>
