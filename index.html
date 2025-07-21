@@ -1,25 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
+
 <head>
   <meta charset="UTF-8">
-  <title>Bingo QR Scanner</title>
-  <link rel="stylesheet" href="style.css">
-
-  <!-- QR‑code generator -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-  <!-- In‑browser QR scanner -->
-  <script src="https://unpkg.com/html5-qrcode@2.3.7/minified/html5-qrcode.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helix House IG Showcase - Bingo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bingo.css" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
 </head>
+
 <body>
-  <h1>Bingo QR Scanner</h1>
+  <div class="main-container">
+    <h1 class="text-center mt-4 mb-4">GreyCTF Summit Bingo</h1>
 
-  <!-- 1) Bingo grid will go here -->
-  <div id="bingo-grid"></div>
+    <ul class="nav nav-tabs justify-content-center mb-4" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="bingo-tab" data-bs-toggle="tab" data-bs-target="#bingo" type="button"
+          role="tab" aria-controls="bingo" aria-selected="true">Bingo</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="scan-tab" data-bs-toggle="tab" data-bs-target="#scan" type="button" role="tab"
+          aria-controls="scan" aria-selected="false">Scan QR Code</button>
+      </li>
+    </ul>
 
-  <!-- 2) Scanner viewport -->
-  <div id="reader" style="width:300px; margin:20px auto;"></div>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="bingo" role="tabpanel" aria-labelledby="bingo-tab">
+        <div class="bingo-container">
+          <p class="bingo_id" id="bingo_id"></p>
 
-  <!-- your JS logic -->
-  <script src="script.js"></script>
+          <div id="bingo-board" class="bingo-board">
+            <!-- Bingo cells will be added here dynamically -->
+          </div>
+          <div class="bingo-message" id="message">
+            Complete 4 tasks in a row, column or diagonal to redeem limited edition Greyhats merch! Tap each square for
+            more information.
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="scan" role="tabpanel" aria-labelledby="scan-tab">
+        <div class="text-center mt-4 mb-4">
+        </div>
+        <div id="reader"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="cellModal" tabindex="-1" aria-labelledby="cellModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cellModalLabel">Cell Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="cellModalBody">
+          <!-- Modal content will be inserted here -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="config.js"></script>
+  <script src="bingo.js"></script>
+  <script defer src="https://umami.jro.sg/interesting-file.js" data-website-id="feb5f2f0-67e0-4e0a-8254-faa2bd335cec"></script>
 </body>
+
 </html>
