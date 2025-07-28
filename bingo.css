@@ -22,6 +22,7 @@ html {
   gap: 5px;
   width: 90vmin;
   max-width: 500px;
+  margin-top: 0;
 }
 
 .bingo-cell {
@@ -56,6 +57,7 @@ html {
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 .bingo_id {
