@@ -1,88 +1,79 @@
-body,
-html {
-  height: 100vh;
+/* 1. Base reset to prevent horizontal overflow */
+html, body {
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
+  height: 100%;
 }
 
-.main-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.bingo-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 60vh;
+/* 2. Container for message + grid
+   Ensures the message always sits above the grid with breathing room */
+.bingo-message {
+  max-width: 90vw;
+  margin: 1.5rem auto 0; /* top margin separates from heading */
+  padding: 0.75rem;
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 #bingo-grid {
   display: grid;
-  gap: 10px;
-  margin: 2rem auto;
+  gap: 1rem;
+  margin: 1rem auto 2rem; /* space above and below grid */
 
-  /* Responsive columns: as many 120px‑wide squares as will fit */
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  /* auto-fit creates as many columns as will fit
+     each at least 120px wide, but stretching to fill */
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 
-  /* Constrain overall width so it doesn’t stretch endlessly */
   width: 100%;
   max-width: 1000px;
 }
 
-.bingo-board {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
-  width: 90vmin;
-  max-width: 500px;
-  margin-top: 0;
-}
-
+/* 3. Perfectly square cells using padding trick */
 .bingo-cell {
-  aspect-ratio: 1 / 1;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  width: 100%;
+  padding-top: 100%;   /* creates a square */
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  cursor: pointer;
+}
+.bingo-cell > * {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   text-align: center;
+  padding: 0.25rem;
+  font-size: 0.8rem;
   word-wrap: break-word;
-  overflow-wrap: break-word;
-  font-size: 80%;
-  margin-bottom: 1rem;
-  aspect-ratio: 1 / 1;
 }
 
-.marked {
+/* 4. Marked state */
+.bingo-cell.marked {
   background-color: #28a745;
-  color: white;
+  color: #fff;
 }
 
+/* 5. Scanner and print adjustments */
 #reader {
   width: 100%;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 1rem auto;
+}
+#scan-btn, #print-btn {
+  display: block;
+  margin: 1rem auto;
 }
 
-.bingo-message {
-  text-align: center;
-  max-width: 80vw;
-  font-size: 14px;
-  margin-top: 20px;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
-.bingo_id {
-  font-size: 24px;
-}
-
-
-@media only screen and (max-width: 600px) {
-  .bingo-message {
-    max-width: 90vw;
-  }
+@media print {
+  /* show only the grid */
+  body * { visibility: hidden; }
+  #bingo-grid, #bingo-grid * { visibility: visible; }
+  #bingo-grid { position: static; }
+  #scan-btn, #print-btn, #reader, .bingo-message { display: none; }
 }
