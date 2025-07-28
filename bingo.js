@@ -16,14 +16,27 @@ for (let row = 0; row < 5; row++) {
     const idx = row * 5 + col;
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
-    cell.textContent = names[idx];
     cell.dataset.row = row;
     cell.dataset.col = col;
 
-    // when tapped or clicked, toggle & color
+    // 1) Embed a fixed QR code for this square
+    const qrDiv = document.createElement('div');
+    qrDiv.className = 'qr-code';
+    new QRCode(qrDiv, {
+      text: `${row};${col}`, // scanner payload
+      width: 80,
+      height: 80
+    });
+    cell.appendChild(qrDiv);
+
+    // 2) Add the label underneath
+    const lbl = document.createElement('span');
+    lbl.innerText = names[idx];
+    cell.appendChild(lbl);
+
+    // 3) Existing scan/click logic remains (this toggles .marked)
     cell.addEventListener('click', () => {
-      boardState[row][col] = !boardState[row][col];
-      cell.classList.toggle('scanned', boardState[row][col]);
+      cell.classList.toggle('marked');
     });
 
     bingoBoard.appendChild(cell);
