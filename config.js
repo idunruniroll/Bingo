@@ -1,27 +1,44 @@
 const cts = [
-    '3c54f089cb0d794a67abf15be0aacf504207003fc81c18f0fc81d09f1a839ed9',
-    'a240bbd2a83b1f0cb7e0677b8b23dc23bcc856cb821a9a46b48d5128c8fc181b',
-    '87be4c7ed2cf447e4cb070f696808dd71ff7b18128cf3a7bcb5cec81a61aa808',
-    'affc2d4e930288e3a237711412f810a1278194c48cd7a07b16b2395f2752977b',
-    '193889bcc17f3129ffe45e22b67217a8bb62932c4be401bccf2cb6b6a2c31154',
-    'b95d78c50a8e397c2da2b327fadaeb7891bc6588f460c293ab82b9985430e345',
-    'c8f68d1b5b029b956ef3f98e42507b83cd390b381b56ce35fcb2370a378860f5',
-    '976b6f779191ffa8f4b8a99d5a1d21aa24710362effe5d826477b3c6e27947a7',
-    'dafa06700bb6327a2d27b1911107cb4e0c3aa9cfda503a54977be16b4afa4fd3',
-    '1624adde0b48e2a368f9550835d6c02eb372cfb616c5bb196f8c6ab975b4884c'
-]
+    'f8a07ca565ebf3a793f870750699f3387ed68ca7f69e9796a9834c5009beeb76',
+    '098a4fe52dc172db468ce64a197dbd2de33a4a72246da26250b3bc4de63baf7e',
+    '5aed6a963b835654ff7da8570fbb6beadce2c9a3406ac2ab031ac0237c2a9a70',
+    '7ca0d6ac181f8ce44bec75b972892c0bd7ab07d36475d03c393328a158e19c77',
+    '896a151f14aaebce26a4b42001b6b2a4e121f0d0425a107c2485e08e685c96a6',
+    '648a83cb97c056198cfcaa110a2e3cb989da6c9631b6e79781c5af0c71dfaf82',
+    '9781728a977c6d08190c86c8a0cebf491144b1f1b899448ad22da0d2f1bb1c81',
+    'f65e7227e41d60ef600a3275b2a8b5c8dabcb08a5d58f37b4e193d520eb4155f',
+    '29e1b171dbc43b8ec97984d3b48eb7b83561416c8e6ecbb8e43a0547e699b142',
+    'dbd02697295665f3c992eb0e2634e5096d45c812d058ad9ea2a534a8d4da0ff0',
+    'b5e0cf8b3b26f582e54b9efee5ea32b86f11ca1e18f142f6a35144aadb57a6b9',
+    '873f0569929f42d054671b932d104d1510aa66cdef73c6aa1e568cd6e43dd62a'
+    ]
 
 
-const names = ['CSIT', 'Div0', 'DSO',
-    'Opening Talk',
-    'Athena Dynamics', 'SARTS',
-    'Darknet Intelligence',
-    'Bug Bounty Village', 'ISD',
-    'Puzzletopia', 'TikTok',
-    'Hardware Badge',
-    'Range Village', 'ShellGym',
-    'DIS', 'ISC2 SG Youth Wing'
-]
+const names = ['Helix Yogis','Let\'s Meditate!',
+    'Helix Bean & Leaf',
+    'Badminton',
+    'Table Tennis',
+    'Frisbee (Hucks)',
+    'Floorball',
+    'Helix Gym',
+    'Pickle Ball',
+    'Basketball',
+    'Running',
+    'Helix Heights',
+    'heart',
+    'Helix Band',
+    'Helix Photography Club',
+    'Dance Society',
+    'Crochet Club',
+    'Helix Gardening',
+    'Helix Oven & Stove',
+    'Helix Readers (book club)',
+    'Helix Knights',
+    'Helix Games',
+    'Helix Heritage',
+    'Helix House Board Friends Forever',
+    'Helix Publicity',
+    ]
 
 
 const items = {

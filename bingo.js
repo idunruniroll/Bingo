@@ -3,7 +3,7 @@ const scanButton = document.getElementById('scan-button');
 const bingoTab = document.getElementById('bingo-tab');
 const scanTab = document.getElementById('scan-tab');
 let scanner;
-let boardState = Array(4).fill().map(() => Array(4).fill(null));
+let boardState = Array(5).fill().map(() => Array(5).fill(null));
 const scans = JSON.parse(localStorage.getItem("scans") ?? "[]");
 const id = localStorage.getItem("id") ?? Math.random().toString().slice(2, 8).toUpperCase();
 localStorage.setItem("scans", JSON.stringify(scans));
@@ -11,12 +11,12 @@ localStorage.setItem("id", id);
 bingo_id.innerText = "Bingo ID: "+id;
 
 // Create bingo board
-for (let i = 0; i < 4; i++) {
-  for (let j = 0; j < 4; j++) {
+for (let i = 0; i < 5; i++) {
+  for (let j = 0; j < 5; j++) {
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
-    cell.textContent = names[i * 4 + j];
-    cell.addEventListener('click', () => showCellModal(names[i * 4 + j], items[names[i * 4 + j]]));
+    cell.textContent = names[i * 5 + j];
+    cell.addEventListener('click', () => showCellModal(names[i * 5 + j], items[names[i * 5 + j]]));
     cell.dataset.row = i;
     cell.dataset.col = j;
     bingoBoard.appendChild(cell);
@@ -95,21 +95,21 @@ function checkBingo(row, col) {
   if (boardState.every(row => row[col] !== null)) {
     bingoData = boardState.map(row => row[col].colData).join('');
     console.log("Column Bingo!", bingoData);
-    i = col + 4;
+    i = col + 5;
   }
 
   // Check main diagonal
   if (row === col && boardState.every((row, i) => row[i] !== null)) {
     bingoData = boardState.map((row, i) => row[i].diagData).join('');
     console.log("Main Diagonal Bingo!", bingoData);
-    i = 8;
+    i = 10;
   }
 
   // Check anti-diagonal
-  if (row + col === 3 && boardState.every((row, i) => row[3 - i] !== null)) {
-    bingoData = boardState.map((row, i) => row[3 - i].diagData).join('');
+  if (row + col === 4 && boardState.every((row, i) => row[4 - i] !== null)) {
+    bingoData = boardState.map((row, i) => row[4 - i].diagData).join('');
     console.log("Anti-Diagonal Bingo!", bingoData);
-    i = 9;
+    i = 11;
   }
 
   if (bingoData) {
