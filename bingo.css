@@ -6,11 +6,10 @@ html, body {
   height: 100%;
 }
 
-/* 2. Container for message + grid
-   Ensures the message always sits above the grid with breathing room */
+/* 2. Message styling */
 .bingo-message {
   max-width: 90vw;
-  margin: 1.5rem auto 0; /* top margin separates from heading */
+  margin: 1.5rem auto 0;
   padding: 0.75rem;
   background-color: rgba(0,0,0,0.2);
   border-radius: 5px;
@@ -18,27 +17,24 @@ html, body {
   font-size: 0.9rem;
 }
 
+/* 3. Responsive grid container */
 #bingo-grid {
   display: grid;
   gap: 1rem;
-  margin: 1rem auto 2rem; /* space above and below grid */
-
-  /* auto-fit creates as many columns as will fit
-     each at least 120px wide, but stretching to fill */
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-
+  margin: 1rem auto 2rem;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
+  /* auto-fit for large screens, min 100px on small screens */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 
-/* 3. Perfectly square cells using padding trick */
+/* 4. Square cells via padding trick */
 .bingo-cell {
   position: relative;
   width: 100%;
-  padding-top: 100%;   /* creates a square */
+  padding-top: 100%;
   border: 1px solid rgba(255,255,255,0.1);
   overflow: hidden;
-  cursor: pointer;
 }
 .bingo-cell > * {
   position: absolute;
@@ -53,13 +49,13 @@ html, body {
   word-wrap: break-word;
 }
 
-/* 4. Marked state */
+/* 5. Marked state */
 .bingo-cell.marked {
   background-color: #28a745;
   color: #fff;
 }
 
-/* 5. Scanner and print adjustments */
+/* 6. Scanner and print adjustments */
 #reader {
   width: 100%;
   max-width: 400px;
@@ -68,6 +64,18 @@ html, body {
 #scan-btn, #print-btn {
   display: block;
   margin: 1rem auto;
+}
+
+/* 7. Mobile-specific tweaks */
+@media (max-width: 600px) {
+  #bingo-grid {
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+  .bingo-cell > * {
+    font-size: 0.7rem;
+    padding: 0.2rem;
+  }
 }
 
 @media print {
