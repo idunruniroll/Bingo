@@ -18,9 +18,10 @@ html {
 
 .bingo-board {
   display: grid;
-  /* change from 4 to 5 columns */
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  width: 90vmin;
+  max-width: 400px;
 }
 
 .bingo-cell {
@@ -60,22 +61,6 @@ html {
 .bingo_id {
   font-size: 24px;
 }
-
-/* at the bottom of bingo.css */
-
-.qr-codes-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  justify-items: center;
-}
-
-.qr-item {
-  text-align: center;
-  line-height: 1.2;
-  font-size: 90%;
-}
-
 
 
 @media only screen and (max-width: 600px) {

@@ -12,34 +12,16 @@ const cts = [
 ]
 
 
-const names = [
-  'Helix Yogis',
-  "Let's Meditate!",
-  'Helix Bean & Leaf',
-  'Badminton',
-  'Table Tennis',
-  'Frisbee (Hucks)',
-  'Floorball',
-  'Helix Gym',
-  'Pickle Ball',
-  'Basketball',
-  'Running',
-  'Helix Heights',
-  'heArt',
-  'Helix Band',
-  'Helix Photography Club',
-  'Dance Society',
-  'Crochet Club',
-  'Helix Gardening',
-  'Helix Oven & Stove',
-  'Helix Readers (book club)',
-  'Helix Knights',
-  'Helix Games',
-  'Helix Heritage',
-  'Helix House Board Friends Forever',
-  'Helix Publicity'
-];
-
+const names = ['CSIT', 'Div0', 'DSO',
+    'Opening Talk',
+    'Athena Dynamics', 'SARTS',
+    'Darknet Intelligence',
+    'Bug Bounty Village', 'ISD',
+    'Puzzletopia', 'TikTok',
+    'Hardware Badge',
+    'Range Village', 'ShellGym',
+    'DIS', 'ISC2 SG Youth Wing'
+]
 
 
 const items = {

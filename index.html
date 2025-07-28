@@ -4,17 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Helix House IG Showcase - Bingo</title>
+  <title>GreyCTF Summit 2025 - Bingo</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="bingo.css" rel="stylesheet" />
   <link rel="icon" type="image/png" href="/favicon.png" />
-  <!-- QR‑generation library -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
   <div class="main-container">
-    <h1 class="text-center mt-4 mb-4">Helix House IG Showcase - Bingo</h1>
+    <h1 class="text-center mt-4 mb-4">GreyCTF Summit Bingo</h1>
 
     <ul class="nav nav-tabs justify-content-center mb-4" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
@@ -24,17 +22,6 @@
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="scan-tab" data-bs-toggle="tab" data-bs-target="#scan" type="button" role="tab"
           aria-controls="scan" aria-selected="false">Scan QR Code</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="print-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#print"
-            type="button"
-            role="tab"
-            aria-controls="print"
-            aria-selected="false">
-          QR Codes
-        </button>
       </li>
     </ul>
 
@@ -47,8 +34,8 @@
             <!-- Bingo cells will be added here dynamically -->
           </div>
           <div class="bingo-message" id="message">
-            Complete 5 tasks in a row, column or diagonal to redeem the refreshment      
-            (WHILE STOCKS LAST!!!)
+            Complete 4 tasks in a row, column or diagonal to redeem limited edition Greyhats merch! Tap each square for
+            more information.
           </div>
         </div>
       </div>
@@ -57,11 +44,6 @@
         </div>
         <div id="reader"></div>
       </div>
-      <div class="tab-pane fade" id="print" role="tabpanel" aria-labelledby="print-tab">
-        <div class="qr-codes-grid p-4" id="qr-codes-container">
-          <!-- JS will inject one 128×128 QR + label per square here -->
-+       </div>
-+     </div>
     </div>
   </div>
 

@@ -3,7 +3,7 @@ const scanButton = document.getElementById('scan-button');
 const bingoTab = document.getElementById('bingo-tab');
 const scanTab = document.getElementById('scan-tab');
 let scanner;
-let boardState = Array(5).fill().map(() => Array(5).fill(false));
+let boardState = Array(4).fill().map(() => Array(4).fill(null));
 const scans = JSON.parse(localStorage.getItem("scans") ?? "[]");
 const id = localStorage.getItem("id") ?? Math.random().toString().slice(2, 8).toUpperCase();
 localStorage.setItem("scans", JSON.stringify(scans));
@@ -11,25 +11,17 @@ localStorage.setItem("id", id);
 bingo_id.innerText = "Bingo ID: "+id;
 
 // Create bingo board
-for (let row = 0; row < 5; row++) {
-  for (let col = 0; col < 5; col++) {
-    const idx = row * 5 + col;
+for (let i = 0; i < 4; i++) {
+  for (let j = 0; j < 4; j++) {
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
-    cell.textContent = names[idx];
-    cell.dataset.row = row;
-    cell.dataset.col = col;
-
-    // when tapped or clicked, toggle & color
-    cell.addEventListener('click', () => {
-      boardState[row][col] = !boardState[row][col];
-      cell.classList.toggle('scanned', boardState[row][col]);
-    });
-
+    cell.textContent = names[i * 4 + j];
+    cell.addEventListener('click', () => showCellModal(names[i * 4 + j], items[names[i * 4 + j]]));
+    cell.dataset.row = i;
+    cell.dataset.col = j;
     bingoBoard.appendChild(cell);
   }
 }
-
 
 // Show modal for cell
 function showCellModal(title, content) {
@@ -160,50 +152,6 @@ function decryptChallenge(bingoData, idx) {
 
   umami.track('Bingo Completed', {"id": id});
 }
-
-
-// ─── QR‑Code Generator ───────────────────────────────────────────
-function generateQRCodes() {
-  const container = document.getElementById('qr-codes-container');
-  container.innerHTML = '';
-
-  for (let row = 0; row < 5; row++) {
-    for (let col = 0; col < 5; col++) {
-      const idx = row * 5 + col;
-      const cellName = names[idx];
-      
-      // prepare exactly the payload your scanner logic expects:
-      const rowData  = cts[row];
-      const colData  = cts[col + 4];
-      let diagData   = '';
-      if      (row === col)        diagData = cts[8];   // main diagonal
-      else if (row + col === 3)    diagData = cts[9];   // anti-diagonal (adjust if your board size changes)
-
-      const payload = [ row, col, rowData, colData, diagData ].join(';');
-
-      // create the QR
-      const wrapper = document.createElement('div');
-      wrapper.className = 'qr-item';
-
-      new QRCode(wrapper, {
-        text:    payload,
-        width:   128,
-        height:  128,
-      });
-
-      // add a label underneath
-      const lbl = document.createElement('div');
-      lbl.textContent = cellName;
-      wrapper.appendChild(lbl);
-
-      container.appendChild(wrapper);
-    }
-  }
-}
-
-// regenerate on page load
-document.addEventListener('DOMContentLoaded', generateQRCodes);
-
 
 // Initialize scanner when the page loads
 window.onload = initializeScanner;
