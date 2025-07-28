@@ -25,6 +25,17 @@
         <button class="nav-link" id="scan-tab" data-bs-toggle="tab" data-bs-target="#scan" type="button" role="tab"
           aria-controls="scan" aria-selected="false">Scan QR Code</button>
       </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="print-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#print"
+            type="button"
+            role="tab"
+            aria-controls="print"
+            aria-selected="false">
+          QR Codes
+        </button>
+      </li>
     </ul>
 
     <div class="tab-content" id="myTabContent">
@@ -46,6 +57,11 @@
         </div>
         <div id="reader"></div>
       </div>
+      <div class="tab-pane fade" id="print" role="tabpanel" aria-labelledby="print-tab">
+        <div class="qr-codes-grid p-4" id="qr-codes-container">
+          <!-- JS will inject one 128×128 QR + label per square here -->
++       </div>
++     </div>
     </div>
   </div>
 

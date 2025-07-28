@@ -161,5 +161,49 @@ function decryptChallenge(bingoData, idx) {
   umami.track('Bingo Completed', {"id": id});
 }
 
+
+// ─── QR‑Code Generator ───────────────────────────────────────────
+function generateQRCodes() {
+  const container = document.getElementById('qr-codes-container');
+  container.innerHTML = '';
+
+  for (let row = 0; row < 5; row++) {
+    for (let col = 0; col < 5; col++) {
+      const idx = row * 5 + col;
+      const cellName = names[idx];
+      
+      // prepare exactly the payload your scanner logic expects:
+      const rowData  = cts[row];
+      const colData  = cts[col + 4];
+      let diagData   = '';
+      if      (row === col)        diagData = cts[8];   // main diagonal
+      else if (row + col === 3)    diagData = cts[9];   // anti-diagonal (adjust if your board size changes)
+
+      const payload = [ row, col, rowData, colData, diagData ].join(';');
+
+      // create the QR
+      const wrapper = document.createElement('div');
+      wrapper.className = 'qr-item';
+
+      new QRCode(wrapper, {
+        text:    payload,
+        width:   128,
+        height:  128,
+      });
+
+      // add a label underneath
+      const lbl = document.createElement('div');
+      lbl.textContent = cellName;
+      wrapper.appendChild(lbl);
+
+      container.appendChild(wrapper);
+    }
+  }
+}
+
+// regenerate on page load
+document.addEventListener('DOMContentLoaded', generateQRCodes);
+
+
 // Initialize scanner when the page loads
 window.onload = initializeScanner;
