@@ -66,7 +66,7 @@ function processQRCode(data, scanned = false) {
   const cell = document.querySelector(`.bingo-cell[data-row="${rowIndex}"][data-col="${colIndex}"]`);
   if (cell) {
     if (!scanned) {
-      const name = names[parseInt(rowIndex) * 4 + parseInt(colIndex)];
+      const name = names[parseInt(rowIndex) * 5 + parseInt(colIndex)];
       umami.track('Bingo Stamp - ' + name, {id});
     }
 
