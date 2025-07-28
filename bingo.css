@@ -1,6 +1,7 @@
 body,
 html {
   height: 100vh;
+  overflow-x: hidden;
 }
 
 .main-container {
@@ -14,6 +15,19 @@ html {
   flex-direction: column;
   align-items: center;
   min-height: 60vh;
+}
+
+#bingo-grid {
+  display: grid;
+  gap: 10px;
+  margin: 2rem auto;
+
+  /* Responsive columns: as many 120px‑wide squares as will fit */
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+
+  /* Constrain overall width so it doesn’t stretch endlessly */
+  width: 100%;
+  max-width: 1000px;
 }
 
 .bingo-board {
@@ -36,6 +50,8 @@ html {
   word-wrap: break-word;
   overflow-wrap: break-word;
   font-size: 80%;
+  margin-bottom: 1rem;
+  aspect-ratio: 1 / 1;
 }
 
 .marked {
