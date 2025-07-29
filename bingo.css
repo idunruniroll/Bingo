@@ -1,95 +1,70 @@
-/* ———————————————————————————————————————————— */
-/*  Layout: full‑height flex column, spaced top→middle→bottom */
-/* ———————————————————————————————————————————— */
+body,
+html {
+  height: 100vh;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;  /* header top, grid center, message bottom */
-  align-items: center;
-  min-height: 100vh;               /* fill the viewport */
-  padding: 1rem;
+  min-height: 100vh;
 }
 
-/* Header (h1) stays at top by flex order */
-.main-container > h1 {
-  margin: 0;
-  font-size: clamp(1.2rem, 5vw, 2rem);
-  text-align: center;
-}
-
-/* Bingo container sits in the “middle” slot */
 .bingo-container {
-  flex: 1;                         /* take all the middle space */
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  min-height: 60vh;
 }
 
-/* ———————————————————————————————————————————— */
-/*  Bingo grid: always 5×5 square, fluid to screen size */
-/* ———————————————————————————————————————————— */
 .bingo-board {
   display: grid;
-  grid-template: repeat(5, 1fr) / repeat(5, 1fr);
-  gap: 0.25rem;
-
-  /* Side = min(90 vmin, 600px)—vmin = smaller of vw/vh */
-  width: min(90vmin, 600px);
-  aspect-ratio: 1/1;               /* force perfect square */
-
-  margin: 0;                       /* already centered by parent flex */
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  width: 90vmin;
+  max-width: 400px;
 }
 
-/* Cells */
 .bingo-cell {
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
-  font-size: clamp(0.6rem, 1.2vw, 1rem);
-  text-align: center;
-  background: #fff;
-  border: 1px solid #ccc;
   cursor: pointer;
-}
-.bingo-cell.marked {
-  background-color: #28a745;
-  color: #fff;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 80%;
 }
 
-/* ———————————————————————————————————————————— */
-/*  QR‑Reader KEEP YOUR EXISTING #reader RULES!  */
-/* ———————————————————————————————————————————— */
+.marked {
+  background-color: #28a745;
+  color: white;
+}
+
 #reader {
-  /* don’t touch these—your scanner will keep working */
   width: 100%;
   max-width: 400px;
-  margin: 1rem auto;
+  margin: 0 auto;
 }
 
-/* ———————————————————————————————————————————— */
-/*  Footer message pinned to the bottom slot       */
-/* ———————————————————————————————————————————— */
 .bingo-message {
   text-align: center;
-  max-width: 90vw;
-  font-size: 0.9rem;
-  margin: 1rem 0;
-  padding: 0.75rem;
-  background-color: rgba(0,0,0,0.1);
-  border-radius: 4px;
+  max-width: 80vw;
+  font-size: 14px;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
-/* ———————————————————————————————————————————— */
-/*  Tiny‑screen tweaks                             */
-/* ———————————————————————————————————————————— */
-@media (max-width: 480px) {
-  .bingo-board {
-    gap: 0.2rem;
-  }
-  .bingo-cell {
-    padding: 0.3rem;
-    font-size: 0.55rem;
+.bingo_id {
+  font-size: 24px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .bingo-message {
+    max-width: 90vw;
   }
 }
