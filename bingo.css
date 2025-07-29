@@ -15,29 +15,31 @@ html, body {
 .main-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  align-items: center;        /* horizontally center */
+  padding: 1rem;              /* a little breathing room */
 }
 
+/* 2. Shrink & center the page title */
+.main-container > h1 {
+  /* responsive font between 1.2rem on phones and 1.8rem on desktop */
+  font-size: clamp(1.2rem, 6vw, 1.8rem);
+  margin: 0.5rem 0 1rem;      /* tight top/bottom spacing */
+  text-align: center;
+}
+
+/* 3. Make sure your bingo-container is centered */
 .bingo-container {
-  flex: 1;
+  width: 100%;
+  max-width: min(90vmin, 600px);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+  align-items: center;        /* center its children too */
 }
 
 /* responsive 5×5 square grid */
+/* 5. Ensure the grid itself is perfectly centered */
 .bingo-board {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.5rem;
-
-  /* fill up to 90vmin or cap at 600px on large screens */
-  width: 100%;
-  max-width: min(90vmin, 600px);
-
-  margin: 0 auto;
+  margin: 0 auto;             /* center within its container */
 }
 
 /* keep each cell perfectly square, wrap text, responsive font */
@@ -84,32 +86,29 @@ html, body {
 }
 
 /* Bingo ID styling */
+/* 4. Center the tabs and ID under the title */
+.nav-tabs,    /* if you have a Bootstrap‐style ul.nav-tabs */
 .bingo_id {
-  font-size: 1.5rem;
-  margin: 1rem 0;
+  text-align: center;
+  width: 100%;
 }
 
 /* tiny‑screen tweaks */
+/* 6. Tiny‐screen adjustments */
 @media (max-width: 480px) {
+  .main-container {
+    padding: 0.5rem;
+  }
   .bingo-container {
-    padding: 0.5rem 0;
-  }
-
-  .bingo-board {
-    /* fill the viewport, minus container padding */
-    width: calc(100vw - 1rem);
     max-width: calc(100vw - 1rem);
-    gap: 0.2rem;
   }
-
+  .bingo-board {
+    gap: 0.2rem;
+    width: 100%;
+    max-width: 100%;
+  }
   .bingo-cell {
     padding: 0.2rem;
-    /* force a smaller, readable font */
     font-size: 0.55rem;
-  }
-
-  .bingo-message {
-    font-size: 0.7rem;
-    padding: 0.4rem;
   }
 }
