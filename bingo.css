@@ -1,36 +1,87 @@
-body {
-  font-family: sans-serif;
+/* 1. Base reset to prevent horizontal overflow */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+/* 2. Message styling */
+.bingo-message {
+  max-width: 90vw;
+  margin: 1.5rem auto 0;
+  padding: 0.75rem;
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 5px;
   text-align: center;
-  margin: 0; padding: 0;
+  font-size: 0.9rem;
 }
-h1 { margin: 1em 0; }
-#scan-btn {
-  padding: 0.5em 1em;
-  font-size: 1rem;
-  cursor: pointer;
-}
+
+/* 3. Responsive grid container */
 #bingo-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  max-width: 600px;
-  margin: 1em auto;
+  gap: 1rem;
+  margin: 1rem auto 2rem;
+  width: 100%;
+  max-width: 1200px;
+  /* auto-fit for large screens, min 100px on small screens */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
+
+/* 4. Square cells via padding trick */
 .bingo-cell {
-  padding: 0.5em;
-  background: #eee;
-  border: 2px solid #333;
-  transition: background 0.3s, color 0.3s;
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
 }
-.bingo-cell.scanned {
-  background: green;
-  color: white;
+.bingo-cell > * {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.25rem;
+  font-size: 0.8rem;
+  word-wrap: break-word;
 }
-.bingo-cell > div.qr {
-  margin: auto;
+
+/* 5. Marked state */
+.bingo-cell.marked {
+  background-color: #28a745;
+  color: #fff;
 }
-.bingo-cell > span {
+
+/* 6. Scanner and print adjustments */
+#reader {
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+}
+#scan-btn, #print-btn {
   display: block;
-  margin-top: 0.5em;
-  font-weight: bold;
+  margin: 1rem auto;
+}
+
+/* 7. Mobile-specific tweaks */
+@media (max-width: 600px) {
+  #bingo-grid {
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+  .bingo-cell > * {
+    font-size: 0.7rem;
+    padding: 0.2rem;
+  }
+}
+
+@media print {
+  /* show only the grid */
+  body * { visibility: hidden; }
+  #bingo-grid, #bingo-grid * { visibility: visible; }
+  #bingo-grid { position: static; }
+  #scan-btn, #print-btn, #reader, .bingo-message { display: none; }
 }
