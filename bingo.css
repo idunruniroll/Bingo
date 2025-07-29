@@ -15,15 +15,14 @@ html, body {
 .main-container {
   display: flex;
   flex-direction: column;
-  align-items: center;        /* horizontally center */
-  padding: 1rem;              /* a little breathing room */
+  align-items: center;
+  padding: 0.5rem;
 }
 
 /* 2. Shrink & center the page title */
 .main-container > h1 {
-  /* responsive font between 1.2rem on phones and 1.8rem on desktop */
-  font-size: clamp(1.2rem, 6vw, 1.8rem);
-  margin: 0.5rem 0 1rem;      /* tight top/bottom spacing */
+  font-size: clamp(1rem, 5vw, 1.4rem);
+  margin: 0.5rem 0;
   text-align: center;
 }
 
