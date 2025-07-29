@@ -1,40 +1,39 @@
 body,
 html {
+  margin: 0;
+  padding: 0;
   height: 100vh;
+  overflow: hidden;
 }
 
 .main-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
 }
 
 .bingo-container {
+  flex: 1;                    /* take all remaining space */
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 60vh;
+  justify-content: center;
 }
 
 .bingo-board {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
-  width: 90vmin;
-  max-width: 400px;
+  grid-auto-rows: 1fr;
+  width: 100%;                /* fill the width of its parent */
+  max-width: 90vmin;          /* but never exceed 90% of the smaller viewport dim */
+  aspect-ratio: 1 / 1;        /* keep it square */
+  gap: 0.25rem;
 }
 
 .bingo-cell {
-  aspect-ratio: 1 / 1;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  text-align: center;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  font-size: 80%;
 }
 
 .marked {
@@ -62,6 +61,14 @@ html {
   font-size: 24px;
 }
 
+.tab-content,
+.tab-pane {
+  flex: 1;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 @media only screen and (max-width: 600px) {
   .bingo-message {
