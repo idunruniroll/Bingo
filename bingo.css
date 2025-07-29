@@ -216,3 +216,14 @@ html, body {
   }
 }
 
+@media (min-width: 1024px) {
+  .bingo-board {
+    /* drop the 100vw calc on big screens, use a nice square up to 700px */
+    width: min(90vmin, 700px);
+    max-width: min(90vmin, 700px);
+    aspect-ratio: 1 / 1;    /* keep it square */
+    margin: 0 auto;         /* center it */
+    gap: 0.5rem;            /* a slightly roomier gap */
+  }
+}
+
