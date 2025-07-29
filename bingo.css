@@ -122,3 +122,36 @@ html, body {
     font-size: 0.55rem;
   }
 }
+
+/* TABLET (iPad portrait ~ 768px up to small desktop) */
+@media (min-width: 481px) and (max-width: 1024px) {
+  /* Let the board grow a little larger but stay square */
+  .bingo-board {
+    width: min(85vmin, 700px);
+    max-width: min(85vmin, 700px);
+    gap: 0.5rem;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Slightly more padding & bigger text in each cell */
+  .bingo-cell {
+    padding: 0.4rem;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+  }
+
+  /* Reader (QR scanner) can be wider */
+  #reader {
+    max-width: 500px;
+  }
+
+  /* Heading a touch larger */
+  .main-container > h1 {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+
+  /* Footer message a bit bigger */
+  .bingo-message {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
