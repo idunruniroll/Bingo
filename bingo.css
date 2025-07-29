@@ -75,13 +75,42 @@ html, body {
 }
 
 /* scan‑QR reader */
+/* --------------------------------------------------------
+   Force the camera reader to always be visible and sized
+   -------------------------------------------------------- */
 #reader {
-  width: 100%;
-  max-width: 400px;
-  height: 300px;       /* explicit height so video canvas shows */
-  margin: 1rem auto;
-  background: #000;    /* temporary outline of the video area */
+  /* make sure it actually has some height */
+  min-height: 300px !important;
+  /* allow anything inside to overflow if needed */
+  overflow: visible !important;
+  /* ensure it isn’t clipped by any parent overflow: hidden */
+  position: relative !important;
+  z-index: 9999 !important;
 }
+
+/* When Html5Qrcode injects a <video> or <canvas> into #reader: */
+#reader video,
+#reader canvas {
+  width: 100% !important;     /* fill the container’s width */
+  height: 100% !important;    /* fill the container’s height */
+  object-fit: cover;           /* crop/fit nicely */
+  display: block !important;   /* override any inline styles */
+}
+
+/* If you have tabs that hide/show panes via display: none, ensure the reader-pane
+   doesn’t get zero‐sized when hidden initially. Bootstrap normally uses 
+   .tab-pane.show to reveal it; this just makes sure the hidden pane still has
+   nonzero dimensions when switched in. */
+.tab-pane {
+  display: block !important;
+  visibility: hidden;
+  height: 0;
+}
+.tab-pane.show {
+  visibility: visible !important;
+  height: auto !important;
+}
+
 
 /* if you have standalone buttons */
 #scan-btn,
