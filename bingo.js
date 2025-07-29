@@ -52,11 +52,7 @@ function initializeScanner() {
 
 
   scanTab.addEventListener('shown.bs.tab', () => {
-    scanner.start(
-      { facingMode: "environment" },   // camera constraints
-      qrCodeSuccessCallback,           // ← SUCCESS callback
-      config                           // ← scanning config
-    ).catch(err => console.error("QR start failed:", err));
+    scanner.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
   });
 
   bingoTab.addEventListener('shown.bs.tab', () => {
