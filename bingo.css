@@ -1,67 +1,223 @@
-body,
-html {
-  height: 100vh;
+/* reset & box‑sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* overall layout */
 .main-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  align-items: center;
+  padding: 0.5rem;
 }
 
+/* 2. Shrink & center the page title */
+.main-container > h1 {
+  font-size: clamp(1rem, 5vw, 1.4rem);
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+/* 3. Make sure your bingo-container is centered */
 .bingo-container {
+  width: 100%;
+  max-width: min(90vmin, 600px);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-height: 60vh;
+  align-items: center;        /* center its children too */
 }
 
+/* responsive 5×5 square grid */
+/* 1. Always exactly 5 columns and 5 rows */
 .bingo-board {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-  width: 90vmin;
-  max-width: 400px;
-}
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows:    repeat(5, 1fr);
+  gap: 0.25rem;
 
-.bingo-cell {
-  aspect-ratio: 1 / 1;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  text-align: center;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  font-size: 80%;
-}
-
-.marked {
-  background-color: #28a745;
-  color: white;
-}
-
-#reader {
   width: 100%;
-  max-width: 400px;
+  max-width: min(90vmin, 600px);
+  aspect-ratio: 1/1;
   margin: 0 auto;
 }
 
+/* keep each cell perfectly square, wrap text, responsive font */
+.bingo-cell {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem;
+  text-align: center;
+  word-break: break-word;
+
+  /* scale font between 0.6rem on tiny screens and 0.9rem on desktop */
+  font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+
+  cursor: pointer;
+}
+
+.bingo-cell.marked {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* scan‑QR reader */
+#reader {
+  width: 100%;
+  max-width: 400px;
+  height: 300px;       /* explicit height so video canvas shows */
+  margin: 1rem auto;
+  background: #000;    /* temporary outline of the video area */
+}
+
+/* if you have standalone buttons */
+#scan-btn,
+#print-btn {
+  display: block;
+  margin: 1rem auto;
+}
+
+/* message under board */
 .bingo-message {
   text-align: center;
-  max-width: 80vw;
-  font-size: 14px;
-  margin-top: 20px;
-  padding: 10px;
+  max-width: 90vw;
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
 
-.bingo_id {
-  font-size: 24px;
+/* Bingo ID styling */
+/* 4. Center the tabs and ID under the title */
+/* ------------------------------------------------------------------------------------------------ */
+/*  📌 Align tabs, ID and footer to the exact same container width as the 5×5 grid */
+/* ------------------------------------------------------------------------------------------------ */
+.nav-tabs,
+.bingo_id,
+.bingo-message {
+  /* match your grid’s max width & centering */
+  max-width: min(90vmin, 600px);
+  width: 100%;
+  margin: 0 auto;         /* center it */
+  text-align: center;
 }
 
+/* make the tabs flex‑centered too */
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* optional: tighten up the tab padding */
+.nav-tabs .nav-link {
+  padding: 0.5rem 1rem;
+}
+
+/* tiny‑screen tweaks */
+/* 6. Tiny‐screen adjustments */
+@media (max-width: 480px) {
+  .main-container {
+    padding: 0.5rem;
+  }
+  .bingo-container {
+    max-width: calc(100vw - 1rem);
+  }
+  .bingo-board {
+    width: calc(100vw - 1rem);
+    max-width: none;
+    gap: 0.2rem;
+  }
+  .bingo-cell {
+    padding: 0.2rem;
+    font-size: 0.55rem;
+  }
+  /* Reader can be a bit wider on small screens */
+  #reader {
+    max-width: 90vw;
+    height: 200px;
+  }
+}
+
+/* TABLET (iPad portrait ~ 768px up to small desktop) */
+@media (min-width: 481px) and (max-width: 1023px) {
+  .bingo-board {
+    max-width: min(85vmin, 700px);
+    gap: 0.5rem;
+  }
+  .bingo-cell {
+    padding: 0.4rem;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+  }
+  /* Reader (QR scanner) can be wider */
+  #reader {
+    max-width: 500px;
+    height: 300px;
+  }
+  .main-container > h1 {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+  .bingo-message {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+}
+
+@media (min-width: 481px) {
+  .main-container,
+  .bingo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-container > h1 {
+    text-align: center;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    margin-bottom: 0.5rem;
+  }
+  .bingo-container .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .bingo-container .nav-tabs .nav-link {
+    padding: 0.5rem 1rem;
+  }
+  .bingo-container .bingo_id {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .bingo-container .bingo-message {
+    margin: 1rem auto;
+    text-align: center;
+    max-width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bingo-board {
+    width: min(90vmin, 700px);
+    max-width: min(90vmin, 700px);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    gap: 0.5rem;
+  }
+}
 
 @media only screen and (max-width: 600px) {
   .bingo-message {
