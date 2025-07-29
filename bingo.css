@@ -14,7 +14,6 @@ html {
 }
 
 .bingo-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;         /* center the grid vertically between header & footer */
@@ -24,13 +23,11 @@ html {
 
 .bingo-board {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5,1fr);
   gap: 0.25rem;
-
-  /* side = the smaller of 90vw or 90vh, but never more than 600px */
-  width: min(90vw, 90vh);
-  max-width: 600px;
-  aspect-ratio: 1 / 1;   /* always square */
+  width: 100%;
+  max-width: min(90vmin, 600px);
+  aspect-ratio: 1/1;
 }
 
 .bingo-cell {
