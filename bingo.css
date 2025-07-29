@@ -221,3 +221,8 @@ html, body {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .bingo-message {
+    max-width: 90vw;
+  }
+}
