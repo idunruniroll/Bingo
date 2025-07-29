@@ -1,8 +1,17 @@
-body,
-html {
-  height: 100vh;
+/* reset & box‑sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* overall layout */
 .main-container {
   display: flex;
   flex-direction: column;
@@ -10,61 +19,82 @@ html {
 }
 
 .bingo-container {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 60vh;
+  justify-content: center;
+  padding: 1rem;
 }
 
+/* responsive 5×5 square grid */
 .bingo-board {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
-  width: 90vmin;
-  max-width: 400px;
-}
+  gap: 0.5rem;
 
-.bingo-cell {
-  aspect-ratio: 1 / 1;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  text-align: center;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  font-size: 80%;
-}
-
-.marked {
-  background-color: #28a745;
-  color: white;
-}
-
-#reader {
+  /* fill up to 90vmin or cap at 600px on large screens */
   width: 100%;
-  max-width: 400px;
+  max-width: min(90vmin, 600px);
+
   margin: 0 auto;
 }
 
+/* keep each cell perfectly square, wrap text, responsive font */
+.bingo-cell {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem;
+  text-align: center;
+  word-break: break-word;
+
+  /* scale font between 0.6rem on tiny screens and 0.9rem on desktop */
+  font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+
+  cursor: pointer;
+}
+
+.bingo-cell.marked {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* scan‑QR reader */
+#reader {
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+}
+
+/* message under board */
 .bingo-message {
   text-align: center;
-  max-width: 80vw;
-  font-size: 14px;
-  margin-top: 20px;
-  padding: 10px;
+  max-width: 90vw;
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
 
+/* Bingo ID styling */
 .bingo_id {
-  font-size: 24px;
+  font-size: 1.5rem;
+  margin: 1rem 0;
 }
 
-
-@media only screen and (max-width: 600px) {
-  .bingo-message {
-    max-width: 90vw;
+/* tiny‑screen tweaks */
+@media (max-width: 350px) {
+  .bingo-board {
+    gap: 0.25rem;
+  }
+  .bingo-cell {
+    padding: 0.25rem;
   }
 }
