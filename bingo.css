@@ -4,9 +4,10 @@ html {
 }
 
 .main-container {
-  display: flex;
   flex-direction: column;
   min-height: 100vh;
+  align-items: center;            /* horizontally center header, board, message */
+  padding: 1rem;                  /* give a little breathing room */
 }
 
 .bingo-container {
@@ -18,14 +19,14 @@ html {
 
 .bingo-board {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, 1fr);  
   gap: 5px;
-  width: 90vmin;
-  max-width: 400px;
+  width: clamp(250px, 90vmin, 500px);  /* never smaller than 250px, never larger than 500px, scales with viewport */
+  margin: 1rem 0;                      /* vertical spacing around the grid */
 }
 
 .bingo-cell {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
@@ -49,13 +50,13 @@ html {
 }
 
 .bingo-message {
+  margin-top: 1rem;               
+  max-width: 90vw;                
   text-align: center;
-  max-width: 80vw;
-  font-size: 14px;
-  margin-top: 20px;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
 }
 
 .bingo_id {
@@ -64,6 +65,11 @@ html {
 
 
 @media only screen and (max-width: 600px) {
+   .bingo-board {
+    gap: 3px;
+    /* clamp() will already shrink it down, but you could also override: */
+    /* width: 100%; max-width: 95vw; */
+  }
   .bingo-message {
     max-width: 90vw;
   }
