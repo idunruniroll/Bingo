@@ -18,7 +18,7 @@ html {
 
 .bingo-board {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 5px;
   width: 90vmin;
   max-width: 400px;
