@@ -1,33 +1,41 @@
 body,
 html {
-  height: 100vh;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;       /* allow body to grow if content taller */
+  overflow-x: hidden;      /* no horizontal scroll ever */
 }
 
 .main-container {
+  display: flex;           /* you’d need this */
   flex-direction: column;
+  justify-content: center; /* vertical centering if you like */
+  align-items: center;     /* horizontal centering */
+  width: 100vw;            /* never spill past the viewport */
   min-height: 100vh;
-  align-items: center;            /* horizontally center header, board, message */
-  padding: 1rem;                  /* give a little breathing room */
+  padding: 1rem;
+  box-sizing: border-box;  /* include padding in width calc */
 }
 
 .bingo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 60vh;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .bingo-board {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);  
+  grid-template-columns: repeat(5, 1fr);
   gap: 5px;
-  width: clamp(250px, 90vmin, 500px);  /* never smaller than 250px, never larger than 500px, scales with viewport */
-  margin: 1rem 0;                      /* vertical spacing around the grid */
+  width: clamp(250px, 90vmin, 500px);
+  margin: 1rem 0;          /* space above & below */
 }
 
 .bingo-cell {
   aspect-ratio: 1;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,13 +58,14 @@ html {
 }
 
 .bingo-message {
-  margin-top: 1rem;               
-  max-width: 90vw;                
+  margin-top: 1rem;
+  max-width: 90vw;
   text-align: center;
   font-size: 0.9rem;
   padding: 0.5rem;
   background: rgba(0,0,0,0.2);
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .bingo_id {
