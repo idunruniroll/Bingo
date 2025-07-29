@@ -1,43 +1,61 @@
-/* reset & box‑sizing */
+/*──────────────────────────────────────────────────────────────────────────*/
+/* 1) Add this to your Bingo page’s <body> tag:                          */
+/*                                                                    */
+/*    <body class="bingo-page">                                        */
+/*      …                                                              */
+/*    </body>                                                          */
+/*                                                                    */
+/* 2) Do NOT add “bingo-page” to your Scan‑QR page’s <body>.           */
+/*──────────────────────────────────────────────────────────────────────────*/
+
+/* reset & box‑sizing (still global) */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* reset margins/padding (global) */
 html, body {
   margin: 0;
   padding: 0;
+}
+
+/*──────────────────────────────────────────────────────────────────────────*/
+/* Bingo‑page–only styles:                                                 */
+/*──────────────────────────────────────────────────────────────────────────*/
+
+/* prevent sideways scroll on Bingo page */
+body.bingo-page {
   overflow-x: hidden;
 }
 
 /* overall layout */
-.main-container {
+body.bingo-page .main-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0.5rem;
 }
 
-/* 2. Shrink & center the page title */
-.main-container > h1 {
+/* page title */
+body.bingo-page .main-container > h1 {
   font-size: clamp(1rem, 5vw, 1.4rem);
   margin: 0.5rem 0;
   text-align: center;
 }
 
-/* 3. Make sure your bingo-container is centered */
-.bingo-container {
+/* wrapper around tabs, ID, board & message */
+body.bingo-page .bingo-container {
   width: 100%;
   max-width: min(90vmin, 600px);
   display: flex;
   flex-direction: column;
-  align-items: center;        /* center its children too */
+  align-items: center;
 }
 
-/* responsive 5×5 square grid */
-/* 1. Always exactly 5 columns and 5 rows */
-.bingo-board {
+/* 5×5 grid */
+body.bingo-page .bingo-board {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
@@ -49,8 +67,8 @@ html, body {
   margin: 0 auto;
 }
 
-/* keep each cell perfectly square, wrap text, responsive font */
-.bingo-cell {
+/* cells */
+body.bingo-page .bingo-cell {
   width: 100%;
   aspect-ratio: 1;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -63,26 +81,32 @@ html, body {
   text-align: center;
   word-break: break-word;
 
-  /* scale font between 0.6rem on tiny screens and 0.9rem on desktop */
   font-size: clamp(0.6rem, 1.5vw, 0.9rem);
-
   cursor: pointer;
 }
 
-.bingo-cell.marked {
+/* marked state */
+body.bingo-page .bingo-cell.marked {
   background-color: #28a745;
   color: #fff;
 }
 
-/* scan‑QR reader */
-#reader {
+/* QR‑reader */
+body.bingo-page #reader {
   width: 100%;
   max-width: 400px;
   margin: 1rem auto;
 }
 
-/* message under board */
-.bingo-message {
+/* scan & print buttons */
+body.bingo-page #scan-btn,
+body.bingo-page #print-btn {
+  display: block;
+  margin: 1rem auto;
+}
+
+/* footer message */
+body.bingo-page .bingo-message {
   text-align: center;
   max-width: 90vw;
   font-size: 0.875rem;
@@ -92,83 +116,76 @@ html, body {
   border-radius: 5px;
 }
 
-/* Bingo ID styling and tabs */
-.nav-tabs,
-.bingo_id,
-.bingo-message {
+/* tabs, ID and message all share the same width/centering */
+body.bingo-page .nav-tabs,
+body.bingo-page .bingo_id,
+body.bingo-page .bingo-message {
   max-width: min(90vmin, 600px);
   width: 100%;
   margin: 0 auto;
   text-align: center;
 }
 
-.nav-tabs {
+/* tab styling */
+body.bingo-page .nav-tabs {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
-
-.nav-tabs .nav-link {
+body.bingo-page .nav-tabs .nav-link {
   padding: 0.5rem 1rem;
 }
 
-/* tiny‑screen tweaks */
+/*──────────────────────────────────────────────────────────────────────────*/
+/* responsive tweaks                                                      */
+/*──────────────────────────────────────────────────────────────────────────*/
+
+/* phones */
 @media (max-width: 480px) {
-  .main-container {
+  body.bingo-page .main-container {
     padding: 0.5rem;
   }
-  .bingo-container {
+  body.bingo-page .bingo-container {
     max-width: calc(100vw - 1rem);
   }
-  .bingo-board {
+  body.bingo-page .bingo-board {
     width: calc(100vw - 1rem);
     max-width: none;
     gap: 0.2rem;
   }
-  .bingo-cell {
+  body.bingo-page .bingo-cell {
     padding: 0.2rem;
     font-size: 0.55rem;
   }
 }
 
-/* tablet layouts */
+/* tablets & small desktops */
 @media (min-width: 481px) and (max-width: 1023px) {
-  .bingo-board {
+  body.bingo-page .bingo-board {
     max-width: min(85vmin, 700px);
     gap: 0.5rem;
   }
-  .bingo-cell {
+  body.bingo-page .bingo-cell {
     padding: 0.4rem;
     font-size: clamp(0.75rem, 1.2vw, 1rem);
   }
-  #reader {
+  body.bingo-page #reader {
     max-width: 500px;
   }
-  .main-container > h1 {
+  body.bingo-page .main-container > h1 {
     font-size: clamp(1.4rem, 6vw, 2rem);
   }
-  .bingo-message {
+  body.bingo-page .bingo-message {
     font-size: 0.9rem;
     padding: 0.6rem;
   }
 }
 
-/* larger screens */
+/* large desktops */
 @media (min-width: 1024px) {
-  .bingo-board {
+  body.bingo-page .bingo-board {
     width: min(90vmin, 700px);
     max-width: min(90vmin, 700px);
-    aspect-ratio: 1 / 1;
-    margin: 0 auto;
     gap: 0.5rem;
   }
 }
-
-/* ───────────────────────────────────────────────────────────────────────── */
-/* Override to ensure #reader sizes against the viewport, not its parent:  */
-.main-container #reader {
-  width: min(90vw, 400px) !important;
-  max-width: 400px !important;
-  margin: 1rem auto !important;
-}
-/* ───────────────────────────────────────────────────────────────────────── */
