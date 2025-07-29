@@ -8,7 +8,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  overflow-x: hidden;
 }
 
 /* overall layout */
@@ -90,11 +90,26 @@ html, body {
 }
 
 /* tiny‑screen tweaks */
-@media (max-width: 350px) {
-  .bingo-board {
-    gap: 0.25rem;
+@media (max-width: 480px) {
+  .bingo-container {
+    padding: 0.5rem 0;
   }
+
+  .bingo-board {
+    /* fill the viewport, minus container padding */
+    width: calc(100vw - 1rem);
+    max-width: calc(100vw - 1rem);
+    gap: 0.2rem;
+  }
+
   .bingo-cell {
-    padding: 0.25rem;
+    padding: 0.2rem;
+    /* force a smaller, readable font */
+    font-size: 0.55rem;
+  }
+
+  .bingo-message {
+    font-size: 0.7rem;
+    padding: 0.4rem;
   }
 }
