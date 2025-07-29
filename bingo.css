@@ -97,10 +97,29 @@ html, body {
 
 /* Bingo ID styling */
 /* 4. Center the tabs and ID under the title */
-.nav-tabs,    /* if you have a Bootstrap‐style ul.nav-tabs */
-.bingo_id {
-  text-align: center;
+/* ------------------------------------------------------------------------------------------------ */
+/*  📌 Align tabs, ID and footer to the exact same container width as the 5×5 grid */
+/* ------------------------------------------------------------------------------------------------ */
+.nav-tabs,
+.bingo_id,
+.bingo-message {
+  /* match your grid’s max width & centering */
+  max-width: min(90vmin, 600px);
   width: 100%;
+  margin: 0 auto;         /* center it */
+  text-align: center;
+}
+
+/* make the tabs flex‑centered too */
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* optional: tighten up the tab padding */
+.nav-tabs .nav-link {
+  padding: 0.5rem 1rem;
 }
 
 /* tiny‑screen tweaks */
