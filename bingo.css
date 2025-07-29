@@ -43,13 +43,10 @@ html, body {
   grid-template-rows:    repeat(5, 1fr);
   gap: 0.25rem;
 
-  /* 2. Perfect square that fills the screen width */
-  width: calc(100vw - 1rem);    /* adjust 1rem if your container padding changes */
-  max-width: calc(100vw - 1rem);
-  aspect-ratio: 1 / 1;          /* height = width */
-
-  margin: 0 auto;               /* center */
-  overflow: hidden;             /* no scrollbars inside */
+  width: 100%;
+  max-width: min(90vmin, 600px);
+  aspect-ratio: 1/1;
+  margin: 0 auto;
 }
 
 /* keep each cell perfectly square, wrap text, responsive font */
@@ -132,9 +129,9 @@ html, body {
     max-width: calc(100vw - 1rem);
   }
   .bingo-board {
+    width: calc(100vw - 1rem);
+    max-width: none;
     gap: 0.2rem;
-    width: 100%;
-    max-width: 100%;
   }
   .bingo-cell {
     padding: 0.2rem;
@@ -143,16 +140,13 @@ html, body {
 }
 
 /* TABLET (iPad portrait ~ 768px up to small desktop) */
-@media (min-width: 481px) and (max-width: 1024px) {
+@media (min-width: 481px) and (max-width: 1023px) {
   /* Let the board grow a little larger but stay square */
   .bingo-board {
-    width: min(85vmin, 700px);
+    /* up to 700px or 85% of the viewport’s smaller side */
     max-width: min(85vmin, 700px);
     gap: 0.5rem;
-    aspect-ratio: 1 / 1;
   }
-
-  /* Slightly more padding & bigger text in each cell */
   .bingo-cell {
     padding: 0.4rem;
     font-size: clamp(0.75rem, 1.2vw, 1rem);
