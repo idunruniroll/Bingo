@@ -1,87 +1,70 @@
-/* 1. Base reset to prevent horizontal overflow */
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  height: 100%;
+body,
+html {
+  height: 100vh;
 }
 
-/* 2. Message styling */
-.bingo-message {
-  max-width: 90vw;
-  margin: 1.5rem auto 0;
-  padding: 0.75rem;
-  background-color: rgba(0,0,0,0.2);
-  border-radius: 5px;
-  text-align: center;
-  font-size: 0.9rem;
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* 3. Responsive grid container */
-#bingo-grid {
-  display: grid;
-  gap: 1rem;
-  margin: 1rem auto 2rem;
-  width: 100%;
-  max-width: 1200px;
-  /* auto-fit for large screens, min 100px on small screens */
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-}
-
-/* 4. Square cells via padding trick */
-.bingo-cell {
-  position: relative;
-  width: 100%;
-  padding-top: 100%;
-  border: 1px solid rgba(255,255,255,0.1);
-  overflow: hidden;
-}
-.bingo-cell > * {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+.bingo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 60vh;
+}
+
+.bingo-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  width: 90vmin;
+  max-width: 400px;
+}
+
+.bingo-cell {
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
   justify-content: center;
+  cursor: pointer;
   text-align: center;
-  padding: 0.25rem;
-  font-size: 0.8rem;
   word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 80%;
 }
 
-/* 5. Marked state */
-.bingo-cell.marked {
+.marked {
   background-color: #28a745;
-  color: #fff;
+  color: white;
 }
 
-/* 6. Scanner and print adjustments */
 #reader {
   width: 100%;
   max-width: 400px;
-  margin: 1rem auto;
-}
-#scan-btn, #print-btn {
-  display: block;
-  margin: 1rem auto;
+  margin: 0 auto;
 }
 
-/* 7. Mobile-specific tweaks */
-@media (max-width: 600px) {
-  #bingo-grid {
-    gap: 0.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  }
-  .bingo-cell > * {
-    font-size: 0.7rem;
-    padding: 0.2rem;
-  }
+.bingo-message {
+  text-align: center;
+  max-width: 80vw;
+  font-size: 14px;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
-@media print {
-  /* show only the grid */
-  body * { visibility: hidden; }
-  #bingo-grid, #bingo-grid * { visibility: visible; }
-  #bingo-grid { position: static; }
-  #scan-btn, #print-btn, #reader, .bingo-message { display: none; }
+.bingo_id {
+  font-size: 24px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .bingo-message {
+    max-width: 90vw;
+  }
 }
