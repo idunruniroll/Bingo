@@ -37,9 +37,20 @@ html, body {
 }
 
 /* responsive 5×5 square grid */
-/* 5. Ensure the grid itself is perfectly centered */
+/* 1. Always exactly 5 columns and 5 rows */
 .bingo-board {
-  margin: 0 auto;             /* center within its container */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows:    repeat(5, 1fr);
+  gap: 0.25rem;
+
+  /* 2. Perfect square that fills the screen width */
+  width: calc(100vw - 1rem);    /* adjust 1rem if your container padding changes */
+  max-width: calc(100vw - 1rem);
+  aspect-ratio: 1 / 1;          /* height = width */
+
+  margin: 0 auto;               /* center */
+  overflow: hidden;             /* no scrollbars inside */
 }
 
 /* keep each cell perfectly square, wrap text, responsive font */
