@@ -45,8 +45,8 @@ function initializeScanner() {
     console.log(`Code matched = ${decodedText}`, decodedResult);
     scans.push(decodedText);
     localStorage.setItem("scans", JSON.stringify(scans));
-    processQRCode(decodedText);
     bingoTab.click(); // Switch back to the Bingo tab
+    processQRCode(decodedText);
   };
   const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 
